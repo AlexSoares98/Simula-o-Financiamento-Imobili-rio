@@ -1,20 +1,13 @@
-/* Aluno: Alex Augusto Soares
- * Curso: Análise e Desenvolvimento de Sistemas
- * Faculdade: PUCPPR
- */
-
 package modelo;
 import java.text.NumberFormat;
 import java.io.Serializable;
 
 public abstract class Financiamento implements Serializable {
 
-    // Atributos
     protected double valorImovel;
     protected int prazoFinanciamento;
     protected double taxaJurosAnual;
 
-    //Incluindo getter para cada um dos atributos que estão privados
     public double getValorImovel() {
         return this.valorImovel;
     }
@@ -25,21 +18,18 @@ public abstract class Financiamento implements Serializable {
         return this.taxaJurosAnual;
     }
 
-    // Construtor
     public Financiamento (double valorDesejadoImovel, int prazoFinanciamentoAnos, double taxaJurosAnual) {
         this.valorImovel = valorDesejadoImovel;
         this.prazoFinanciamento = prazoFinanciamentoAnos;
         this.taxaJurosAnual = taxaJurosAnual;
     }
 
-    // Métodos
     public abstract double calcularPagamentoMensal();
 
     public double calcularPagamentoTotal() {
-        return this.calcularPagamentoMensal() * this.prazoFinanciamento * 12; // Cálculo do valor total do financimento
+        return this.calcularPagamentoMensal() * this.prazoFinanciamento * 12; 
     }
 
-    // Apresenta alguns dados do financiamento, como o valor total do imóvel, valor total do financiamento, taxa de juros anual e valor total do financiamento
     public void dadosFinanciamento() {
         NumberFormat nf = NumberFormat.getCurrencyInstance();
         System.out.println("Valor total do imóvel: " + nf.format(getValorImovel()));
