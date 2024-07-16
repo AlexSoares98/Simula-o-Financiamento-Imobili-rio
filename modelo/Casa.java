@@ -6,7 +6,6 @@ public class Casa extends Financiamento {
     private double areaConstruida;
     private double areaTerreno;
 
-    // Construtor que inicializa os atributos do financiamento
     public Casa(double valorDesejadoImovel, int prazoFinanciamentoAnos, double taxaJurosAnual, double areaConstruida, double areaTerreno) {
         super(valorDesejadoImovel, prazoFinanciamentoAnos, taxaJurosAnual);
         this.areaConstruida = areaConstruida;
@@ -15,13 +14,9 @@ public class Casa extends Financiamento {
 
     @Override
     public double calcularPagamentoMensal() {
-        // Calcula a taxa mensal
         double taxaMensal = this.taxaJurosAnual / 12 / 100;
-        // Calcula o valor em meses do financiamento
         int mesesFinanciamento = this.prazoFinanciamento * 12;
-        // Retorna o pagamento mensal base  adiciona mais 80 à parcela mensal
         double pagamentoMensal = (super.getValorImovel() / mesesFinanciamento) * (1 + (taxaMensal))  + 80;
-        // Adiciona lógica de desconto (Exemplo: desconto de 50)
         double desconto = 55;
         try {
             analisarDesconto(pagamentoMensal, desconto);
@@ -32,15 +27,13 @@ public class Casa extends Financiamento {
         return pagamentoMensal;
     }
 
-    // Método para analisar se o desconto é maior que o juros
     private void analisarDesconto(double pagamentoMensal, double desconto) throws DescontoMaiorQueJurosException {
         double jurosMensais = (this.taxaJurosAnual / 12 / 100) * this.valorImovel / this.prazoFinanciamento;
         if (desconto > jurosMensais) {
-            throw new DescontoMaiorQueJurosException("O valor do desconto não pode ser maior que os juros!"); // Mensagem de erro para o valor do desconto
+            throw new DescontoMaiorQueJurosException("O valor do desconto não pode ser maior que os juros!"); 
         }
     }
 
-    // Descrição salva sobre o financiamento da casa
     @Override
     public String toString() {
         return String.format("""
